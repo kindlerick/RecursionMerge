@@ -44,7 +44,30 @@ function mergeSort(array){
 
     let newArray = [];
 
+    let n = array.length;
+    let m = Math.floor(n / 2);
+    let b = array.slice(0, m);
 
+    if (n <= 1) {
+        return array;
+    }
 
-    return newArray;
+    let left = mergeSort(b);
+    let right = mergeSort(array.slice(m));
+
+    let i = 0, j = 0;
+
+    while (i < left.length && j < right.length) {
+        if (left[i] <= right[j]) {
+            newArray.push(left[i++]);
+        } else {
+            newArray.push(right[j++]);
+        }
+    }
+
+    return newArray.concat(left.slice(i), right.slice(j));
+
 }
+
+console.log("Merge Sort Original: " + array);
+console.log("Merge Sort Sorted: " + mergeSort(array));
